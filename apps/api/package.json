@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "bin": {
+    "api": "bin/api.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "deploy": "cdk deploy",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint-types": "oxlint --type-aware",
+    "check": "oxfmt && oxlint --type-aware",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.232.1",
+    "constructs": "^10.0.0",
+    "hono": "^4.11.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "aws-cdk": "2.1100.1",
+    "esbuild": "^0.27.2",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.3"
+  }
+}
