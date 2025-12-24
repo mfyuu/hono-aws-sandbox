@@ -1,6 +1,6 @@
 import fs from "fs/promises";
-import path from "path";
 import { glob } from "glob";
+import path from "path";
 
 async function collectCoverageFiles() {
   try {
@@ -39,10 +39,7 @@ async function collectCoverageFiles() {
 
             // Copy it to the destination with a unique name
             const directoryName = path.basename(match);
-            const destinationFile = path.join(
-              destinationDir,
-              `${directoryName}.json`
-            );
+            const destinationFile = path.join(destinationDir, `${directoryName}.json`);
 
             await fs.copyFile(coverageFilePath, destinationFile);
           } catch (err) {
@@ -57,9 +54,7 @@ async function collectCoverageFiles() {
 
     if (directoriesWithCoverage.length > 0) {
       console.log(
-        `Found coverage.json in: ${directoriesWithCoverage
-          .map(replaceDotPatterns)
-          .join(", ")}`
+        `Found coverage.json in: ${directoriesWithCoverage.map(replaceDotPatterns).join(", ")}`,
       );
     }
 
