@@ -5,6 +5,8 @@
     "api": "bin/api.js"
   },
   "scripts": {
+    "predev": "cdk synth --no-staging > template.yaml",
+    "dev": "sam local start-api",
     "build": "tsc",
     "watch": "tsc -w",
     "cdk": "cdk",
@@ -14,16 +16,24 @@
     "lint": "oxlint",
     "lint-types": "oxlint --type-aware",
     "check": "oxfmt && oxlint --type-aware",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "openapi:json": "dotenv -e .env -- sh -c 'curl \"$OPENAPI_ENDPOINT\" -o openapi.json'",
+    "openapi:yml": "cat openapi.json | yq -P > openapi.yml",
+    "openapi:generate": "bun openapi:json && bun openapi:yml"
   },
   "dependencies": {
+    "@hono/swagger-ui": "^0.5.2",
+    "@valibot/to-json-schema": "^1.5.0",
     "aws-cdk-lib": "2.232.1",
     "constructs": "^10.0.0",
-    "hono": "^4.11.1"
+    "hono": "^4.11.1",
+    "hono-openapi": "^1.1.2",
+    "valibot": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
     "aws-cdk": "2.1100.1",
+    "dotenv-cli": "^11.0.0",
     "esbuild": "^0.27.2",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3"
