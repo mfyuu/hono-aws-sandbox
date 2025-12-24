@@ -42,7 +42,7 @@ async function collectCoverageFiles() {
             const destinationFile = path.join(destinationDir, `${directoryName}.json`);
 
             await fs.copyFile(coverageFilePath, destinationFile);
-          } catch (err) {
+          } catch {
             // File doesn't exist in this directory, skip
           }
         }
@@ -65,4 +65,4 @@ async function collectCoverageFiles() {
 }
 
 // Run the function
-collectCoverageFiles();
+void collectCoverageFiles();
