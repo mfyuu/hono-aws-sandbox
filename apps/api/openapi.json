@@ -5,7 +5,7 @@
     "description": "Hono AWS Sandbox API",
     "version": "0.1.0"
   },
-  "servers": [{ "url": "https://2inyemwltk.execute-api.ap-northeast-1.amazonaws.com/dev" }],
+  "servers": [{ "url": "https://8h8pfjxiwf.execute-api.ap-northeast-1.amazonaws.com/dev" }],
   "paths": {
     "/": {
       "get": {
