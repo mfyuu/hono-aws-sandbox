@@ -22,7 +22,10 @@ type Bindings = {
   lambdaContext: LambdaContext;
 };
 
-const app = new Hono<{ Bindings: Bindings }>().use(prettyJSON()).get(
+const app = new Hono<{ Bindings: Bindings }>();
+app.use(prettyJSON());
+
+const route = app.get(
   "/",
   describeRoute({
     description: "Say hello to the user",
@@ -42,7 +45,7 @@ const app = new Hono<{ Bindings: Bindings }>().use(prettyJSON()).get(
   },
 );
 
-app.get("/openapi", (c) => {
+route.get("/openapi", (c) => {
   // API Gatewayのステージ名(/dev等)を含むフルURLをSwagger UIのServersに表示するためリクエストコンテキストから動的に構築
   // openAPIRouteHandlerはミドルウェア形式(c, next)を返すため、手動で呼び出す必要がある
   const requestContext = c.env.event.requestContext;
@@ -69,7 +72,7 @@ app.get("/openapi", (c) => {
 });
 
 // API Gatewayのステージ名(/dev等)を考慮するため相対パスを使用
-app.get("/ui", swaggerUI({ url: "./openapi" }));
+route.get("/ui", swaggerUI({ url: "./openapi" }));
 
-export const handler = handle(app);
-export type AppType = typeof app;
+export const handler = handle(route);
+export type AppType = typeof route;
